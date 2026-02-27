@@ -1,8 +1,8 @@
-from sqlalchemy import Column, String, ForeignKey, Integer
+from sqlalchemy import Column, String, ForeignKey, Integer, Float
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
-from src.datasource.database import Base
+from model.database import Base
 
 class Client(Base):
     __tablename__   = "tb_clients"
@@ -15,11 +15,19 @@ class Client(Base):
 
     orders = relationship('Order', back_populates = 'client')
 
+class Catalog(Base):
+    __tablename__ = 'tb_catalog'
+
+    id = Column(UUID(as_uuid=True), primary_key = True, default=uuid.uuid4)
+    product_name = Column(String, nullable = False)
+    price = Column(Float, nullable = False)
+
 class Order(Base):
     __tablename__   = 'tb_orders'
 
     id              = Column(UUID(as_uuid=True), primary_key = True, default=uuid.uuid4)
-    product_name    = Column(String, nullable = False)
-   
+
+    product_id      = Column(UUID(as_uuid=True), ForeignKey("tb_catalog.id"))
     client_id       = Column(UUID(as_uuid=True), ForeignKey("tb_clients.id"))
     client          = relationship("Client", back_populates = "orders")
+    catalog         = relationship("Catalog")
