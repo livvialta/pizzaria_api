@@ -7,9 +7,10 @@ class CreateClient(BaseModel):
     address: str
     address_number: int
 
-class ResponseClient(CreateClient):
-    id: UUID
-
 class CreateOrder(BaseModel):
+    product_id: UUID
+    client_id: UUID
+
+class CreateProduct(BaseModel):
     product_name: str
-    client_id: str
+    price: float

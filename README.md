@@ -47,7 +47,7 @@ python -m src.datasource.create_tables
 ```
 ### 3. Subir a API
 ```bash
-python -m uvicorn src.main:app --reload
+python -m uvicorn main:app --reload
 ```
 ### EXTRA - Acessar a docs 
 ```bash
@@ -55,9 +55,9 @@ http://localhost:8000/docs
 ```
 
 ## O que está pronto:
- - CRUD parcial de clientes e pedidos
+ - CRUD de clientes, pedidos e catalogo de pizzas.
  - Banco funcional
- - Estrutura organizada
+ - Arquitetura MVC
 
 ## Próximos passos:
- Os próximos passos são implementar o CRUD completo de pedidos e orders (filtros por cliente, etc), adicionar os métodos PUT e DELETE para clientes e pedidos, criar testes automatizados
+ Os próximos passos são adicionar autenticação e autorização e criar testes unitários separando no routes a lógica de negócio do controller (colocando em service), mas pra isso preciso de um direcionamento da Mari.
